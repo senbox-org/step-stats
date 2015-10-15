@@ -10,6 +10,8 @@ import numpy as np
 
 this_dir = os.path.dirname( os.path.realpath( __file__ ) )
 output_dir = os.path.join(this_dir, "output")
+if not os.path.exists(output_dir):
+  os.makedirs(output_dir)
 gnuplot_dir = os.path.join(this_dir, "gnuplot")
 
 localconfig = os.path.join(os.path.dirname(__file__), 'config.local')
@@ -27,7 +29,7 @@ def get_unique_visitors_for_range(start, end):
   params["period"] = "week"
   params["date"] = "{start}".format(start=start.isoformat())
   params["format"] = "json"
-  params["token_auth"] = config.piwik_auth_token
+  params["token_auth"] = config['piwik_auth_token']
   params["module"] = "API"
   params["method"] = "VisitsSummary.getUniqueVisitors"
   params["expanded"] = "1"

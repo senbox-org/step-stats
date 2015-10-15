@@ -13,6 +13,8 @@ import matplotlib.pyplot as plt
 
 this_dir = os.path.dirname( os.path.realpath( __file__ ) )
 output_dir = os.path.join(this_dir, "output")
+if not os.path.exists(output_dir):
+  os.makedirs(output_dir)
 gnuplot_dir = os.path.join(this_dir, "gnuplot")
 
 platforms = [("windows", "Windows 32 bits"), ("windows-x64", "Windows 64 bits"), ("unix", "Linux"), ("macos", "Mac OSX")]
@@ -32,7 +34,7 @@ def get_downloads_for_range(start, end):
   params["period"] = "range"
   params["date"] = "{start},{end}".format(start=start.isoformat(), end=end.isoformat())
   params["format"] = "json"
-  params["token_auth"] = config.piwik_auth_token
+  params["token_auth"] = config['piwik_auth_token']
   params["module"] = "API"
   params["method"] = "Actions.getDownloads"
   params["expanded"] = "1"
@@ -107,11 +109,6 @@ def generate():
   os.system("gnuplot %s" % (os.path.join(gnuplot_dir, 'unique_downloads.gnuplot')))
   os.system("gnuplot %s" % (os.path.join(gnuplot_dir, 'cumulated_unique_downloads.gnuplot')))
   
-  #download_stats = {}
-  #download_stats.unique_download_table = os.path.join(output_dir, 'unique_downloads.dat')
-  #download_stats.cumulated_unique_downloads = os.path.join(output_dir, 'cumulated_unique_downloads.dat')
-  #download_stats
-
 if __name__ == "__main__":
   generate_download_stats()
   
