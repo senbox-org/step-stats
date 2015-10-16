@@ -15,9 +15,10 @@ Author : Julien Malik @julienmalik
 - python-requests (integrated)
 - python-tabulate (integrated)
 - python-matplotlib
+- python-jinja2
 - gnuplot
 
 On debian based systems, install dependencies with :
 ```
-$ apt-get install python python-sphinx python-matplotlib gnuplot
+$ apt-get install python python-sphinx python-matplotlib python-jinja2 gnuplot
 ```
