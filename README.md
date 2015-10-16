@@ -17,8 +17,10 @@ Author : Julien Malik @julienmalik
 - python-matplotlib
 - python-jinja2
 - gnuplot
+- make
+- LateX
 
 On debian based systems, install dependencies with :
 ```
-$ apt-get install python python-sphinx python-matplotlib python-jinja2 gnuplot
+$ apt-get install python python-sphinx python-matplotlib python-jinja2 gnuplot make texlive
 ```
