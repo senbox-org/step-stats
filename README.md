@@ -22,5 +22,5 @@ Author : Julien Malik @julienmalik
 
 On debian based systems, install dependencies with :
 ```
-$ apt-get install python python-sphinx python-matplotlib python-jinja2 gnuplot make texlive texlive-latex-extra
+$ apt-get install python python-sphinx python-matplotlib python-jinja2 gnuplot make texlive texlive-latex-extra texlive-font-utils
 ```
