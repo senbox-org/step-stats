@@ -3,7 +3,9 @@
 A set of tools to automatically generate statistics report on the usage of SNAP and the STEP website.
 
 Licence : Apache 2
+
 Copyright : 2015 CS SI (www.c-s.fr)
+
 Author : Julien Malik @julienmalik
 
 ## Dependencies
