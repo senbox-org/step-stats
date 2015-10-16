@@ -7,6 +7,9 @@ import time
 import json
 import datetime
 import numpy as np
+
+import matplotlib as mpl
+mpl.rcParams['backend']  = 'ps'
 import matplotlib.pyplot as plt
 
 # http://step.esa.int/piwik/index.php?module=CoreHome&action=index&date=2015-10-02&period=week&idSite=6#/module=Actions&action=menuGetDownloads&date=2015-10-02&period=week&idSite=6
