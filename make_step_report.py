@@ -1,15 +1,23 @@
 import os
 import csv
 from jinja2 import Environment, FileSystemLoader
+import json
 
 from tabulate.tabulate import tabulate
 
 import download_stats
 import step_visitors
+import sendmail
 
 this_dir = os.path.dirname( os.path.realpath( __file__ ) )
 sphinx_dir = os.path.join(this_dir, "sphinx")
 output_dir = os.path.join(this_dir, "output")
+
+localconfig = os.path.join(os.path.dirname(__file__), 'config.local')
+if not os.path.exists(localconfig):
+  raise RuntimeError("You need to set up a config.local file")
+with open(localconfig) as localconfig_stream:
+  config = json.load(localconfig_stream)
 
 def read_csv(filename) :
    with open(filename, 'rb') as datafile:
@@ -41,6 +49,26 @@ def main():
    update_rst(jinjacontext)
    
    os.system('cd %s; make latexpdf' % sphinx_dir)
+
+   
+   sender = config['mail_from']
+   to = [ config['mail_to'] ]
+   subject = 'STEP Surveillance report'
+   text = '''
+Hello there,
+
+Here comes the new statistics from STEP.
+
+Your faithful employee,
+     the STEP Big Brother
+'''
+   files = [ os.path.join(sphinx_dir, "_build/latex", "STEPSurveillanceReport.pdf"), \
+             os.path.join('output', 'unique_downloads.eps'), \
+             os.path.join('output', 'cumulated_unique_downloads.eps'), \
+             os.path.join('output', 'unique_visitors.eps'), \
+             os.path.join('output', 'os_piechart.eps') ]
+
+   sendmail.sendmail('contact@step-email.net', to, subject, text, files) 
 
 if __name__ == "__main__":
   main()
