@@ -1,3 +1,5 @@
 {
-  "piwik_auth_token" : "the_very_long_token"
+  "piwik_auth_token" : "the_very_long_token",
+  "mail_from" : "account@example.com",
+  "mail_to" : "stats-dissemination@example.com"
 }
