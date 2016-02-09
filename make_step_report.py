@@ -55,12 +55,13 @@ def main():
    to = [ config['mail_to'] ]
    subject = 'STEP Surveillance report'
    text = '''
-Hello there,
+Dears,
 
 Here comes the new statistics from STEP.
 
-Your faithful employee,
-     the STEP Big Brother
+STEP server.
+
+PS : this is an automatically-generated email.
 '''
    files = [ os.path.join(sphinx_dir, "_build/latex", "STEPSurveillanceReport.pdf"), \
              os.path.join('output', 'unique_downloads.eps'), \
@@ -68,7 +69,7 @@ Your faithful employee,
              os.path.join('output', 'unique_visitors.eps'), \
              os.path.join('output', 'os_piechart.eps') ]
 
-   sendmail.sendmail('contact@step-email.net', to, subject, text, files) 
+   sendmail.sendmail(config['mail_from'], to, subject, text, files) 
 
 if __name__ == "__main__":
   main()
