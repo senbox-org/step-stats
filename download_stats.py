@@ -47,17 +47,17 @@ def get_downloads_for_range(start, end):
   result = []
   for platform in platforms:
     plaform_key=platform[0]
-    download_regex = "esa-snap[_.*]*_{platform}_2_0".format(platform=plaform_key)
+    #download_regex = "esa-snap[_.*]*_{platform}".format(platform=plaform_key)
+    download_regex = "_{platform}_".format(platform=plaform_key)
     params["filter_pattern"] = download_regex
     r = requests.get(url, params=params)
     jsonresult = r.json()
 
     #print json.dumps(jsonresult, indent=4)
     #download_count = jsonresult[0]["nb_hits"]
-    if len(jsonresult) > 0:
-        unique_download_count = jsonresult[0]["nb_visits"]
-    else:
-        unique_download_count = 0
+    unique_download_count = 0
+    for unique_result in jsonresult:
+        unique_download_count += unique_result["nb_visits"]
     result.append(unique_download_count)
   return result 
 
@@ -75,7 +75,8 @@ def monday_iter(start, end):
 def make_pie_chart(downloads_count):
   labels = [ platform[1] for platform in platforms ]
   colors = ['yellowgreen', 'gold', 'lightskyblue', 'lightcoral']
-  explode = (0.1, 0.1, 0.1, 0.1) # only "explode" the 2nd slice (i.e. 'Hogs')
+  #explode = (0.1, 0.1, 0.1, 0.1) # only "explode" the 2nd slice (i.e. 'Hogs')
+  explode = (0, 0, 0, 0) # only "explode" the 2nd slice (i.e. 'Hogs')
 
   fig = plt.figure()
   plt.pie(downloads_count, explode=explode, labels=labels, colors=colors,
