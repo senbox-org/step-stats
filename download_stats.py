@@ -51,9 +51,13 @@ def get_downloads_for_range(start, end):
     params["filter_pattern"] = download_regex
     r = requests.get(url, params=params)
     jsonresult = r.json()
+
     #print json.dumps(jsonresult, indent=4)
-    download_count = jsonresult[0]["nb_hits"]
-    unique_download_count = jsonresult[0]["nb_visits"]
+    #download_count = jsonresult[0]["nb_hits"]
+    if len(jsonresult) > 0:
+        unique_download_count = jsonresult[0]["nb_visits"]
+    else:
+        unique_download_count = 0
     result.append(unique_download_count)
   return result 
 
