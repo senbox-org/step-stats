@@ -47,7 +47,7 @@ def get_downloads_for_range(start, end):
   result = []
   for platform in platforms:
     plaform_key=platform[0]
-    download_regex = "esa-snap_{platform}_2_0".format(platform=plaform_key)
+    download_regex = "esa-snap[_.*]*_{platform}_2_0".format(platform=plaform_key)
     params["filter_pattern"] = download_regex
     r = requests.get(url, params=params)
     jsonresult = r.json()
